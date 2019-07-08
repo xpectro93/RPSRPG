@@ -17,3 +17,7 @@
 img {
   width:250px;
 }
+#scoreboard {
+  display:flex;
+  justify-content: space-around;
+}
