@@ -53,35 +53,38 @@ export default class App extends Component {
   }
   submitBattle = e => {
     e.preventDefault();
-    let { compChoice, playerChoice, board } = this.state;
+    let { compChoice, playerChoice } = this.state;
     this.compChoiceMaker()
     if (playerChoice === compChoice){
       console.log('tie')
+
       this.setState({
-        board:{
-          tie:this.state.board.tie + 1
-        }
-      })
+        board: Object.assign({},
+          this.state.board,
+        {tie: this.state.board.tie + 1}
+      )
+    });
+
     }
     else if ((playerChoice - compChoice + 3) % 3 === 1){
       console.log('won')
       this.setState({
-        board:{
-          won:this.state.board.won + 1
-        }
-      })
+        board: Object.assign({},
+          this.state.board,
+        {won: this.state.board.won + 1}
+      )
+    });
+
     }else{
       console.log('lost')
       this.setState({
-        board:{
-          lost:this.state.board.lost + 1
-        }
-      })
+        board: Object.assign({},
+          this.state.board,
+        {lost: this.state.board.lost + 1}
+      )
+      });
     }
-    // this.setState({
-    //   playerChoice:-1,
-    //   compChoice:-1
-    // })
+
 
 
   }
