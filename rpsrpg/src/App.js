@@ -34,7 +34,7 @@ componentDidMount(){
   this.setState({
     person: new Person('Jon')
   })
-  console.log(this.state)
+  // console.log(this.state)
 }
   handleChange = e => {
     this.setState({
@@ -52,20 +52,18 @@ componentDidMount(){
 
   }
 
-  compChoiceMaker = () => {
-    this.setState({
-      compChoice:Math.floor(Math.random()*3)
-    })
-
-  }
-  submitBattle = e => {
+  //rock=0, paper=1, scissors=2
+  submitBattle = async e => {
     e.preventDefault();
     let { compChoice, playerChoice } = this.state;
-    this.compChoiceMaker()
-    console.log(this.state.compChoice)
+    await this.setState({
+        compChoice:Math.floor(Math.random()*3)
+    })
+
+
     if (playerChoice === compChoice){
       console.log('tie')
-
+        debugger
       this.setState({
         board: Object.assign({},
           this.state.board,
@@ -75,6 +73,7 @@ componentDidMount(){
 
     }
     else if ((playerChoice - compChoice + 3) % 3 === 1){
+      debugger
       console.log('won')
       this.setState({
         board: Object.assign({},
@@ -84,6 +83,7 @@ componentDidMount(){
     });
 
     }else{
+        debugger
       console.log('lost')
       this.setState({
         board: Object.assign({},
@@ -98,7 +98,7 @@ componentDidMount(){
   }
   setChoice = e => {
     this.setState({
-      [e.target.name]:e.target.id
+      [e.target.name]:+e.target.id
     })
   }
   //rock=0, paper=1, scissors=2
