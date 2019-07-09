@@ -1,7 +1,7 @@
 import React, {Component } from 'react';
 import './App.css';
-let heroImg = 'https://progameguides.com/wp-content/uploads/2019/04/fortnite-spider-knight-featured-png.png'
-let enemyImg = 'https://ui-ex.com/images/knight-transparent-evil.png'
+let heroImg = 'https://www.stickpng.com/assets/thumbs/5a0587ef9cf05203c4b603d1.png'
+let enemyImg = 'https://progameguides.com/wp-content/uploads/2019/04/fortnite-spider-knight-featured-png.png'
 export default class App extends Component {
   state = {
     input:'',
@@ -39,6 +39,13 @@ export default class App extends Component {
       }
     })
   }
+  // submitName = e => {
+  //   this.setState(prevState => ({
+  //     hero:{
+  //         name: prevState.input
+  //     }
+  //   }));
+  // };
   compChoiceMaker = () => {
     this.setState({
       compChoice:Math.floor(Math.random()*3)
@@ -46,35 +53,35 @@ export default class App extends Component {
   }
   submitBattle = e => {
     e.preventDefault();
-    let { compChoice, playerChoice } = this.state;
+    let { compChoice, playerChoice, board } = this.state;
     this.compChoiceMaker()
     if (playerChoice === compChoice){
       console.log('tie')
       this.setState({
         board:{
-          tie:++this.state.board.tie
+          tie:this.state.board.tie + 1
         }
       })
     }
-    else if ((playerChoice - compChoice + 3) % 3 == 1){
+    else if ((playerChoice - compChoice + 3) % 3 === 1){
       console.log('won')
       this.setState({
         board:{
-          won:++this.state.board.won
+          won:this.state.board.won + 1
         }
       })
     }else{
       console.log('lost')
       this.setState({
         board:{
-          lost:++this.state.board.lost
+          lost:this.state.board.lost + 1
         }
       })
     }
-    this.setState({
-      playerChoice:'',
-      compChoice:''
-    })
+    // this.setState({
+    //   playerChoice:-1,
+    //   compChoice:-1
+    // })
 
 
   }
@@ -119,7 +126,7 @@ export default class App extends Component {
 
         <div id ='enemy'>
         <h3>{enemy.health}</h3>
-        <h1>EvilPerson</h1>
+        <h1>{enemy.name}</h1>
         <img src={enemyImg} alt='enemy'></img>
         <div>
           <button id="0"  name="compChoice" onClick={this.setChoice} >Rock</button>
