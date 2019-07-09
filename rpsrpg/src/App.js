@@ -34,18 +34,14 @@ export default class App extends Component {
   submitName = e => {
     e.preventDefault();
     this.setState({
-      hero:{
-        name:this.state.input
-      }
-    })
+      hero: Object.assign({},
+        this.state.hero,
+      {name: this.state.input}
+    )
+  });
+
   }
-  // submitName = e => {
-  //   this.setState(prevState => ({
-  //     hero:{
-  //         name: prevState.input
-  //     }
-  //   }));
-  // };
+
   compChoiceMaker = () => {
     this.setState({
       compChoice:Math.floor(Math.random()*3)
