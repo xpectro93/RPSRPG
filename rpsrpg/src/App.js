@@ -1,8 +1,12 @@
 import React, {Component } from 'react';
 import './App.css';
+import Person from './Person'
 let heroImg = 'https://www.stickpng.com/assets/thumbs/5a0587ef9cf05203c4b603d1.png'
 let enemyImg = 'https://progameguides.com/wp-content/uploads/2019/04/fortnite-spider-knight-featured-png.png'
 export default class App extends Component {
+  constructor(props){
+    super(props)
+  }
   state = {
     input:'',
     hero:{
@@ -23,9 +27,15 @@ export default class App extends Component {
       tie:0,
       won:0,
       lost:0
-    }
+    },
+    person:null
   }
-
+componentDidMount(){
+  this.setState({
+    person: new Person('Jon')
+  })
+  console.log(this.state)
+}
   handleChange = e => {
     this.setState({
       [e.target.id]:e.target.value
@@ -46,11 +56,13 @@ export default class App extends Component {
     this.setState({
       compChoice:Math.floor(Math.random()*3)
     })
+
   }
   submitBattle = e => {
     e.preventDefault();
     let { compChoice, playerChoice } = this.state;
     this.compChoiceMaker()
+    console.log(this.state.compChoice)
     if (playerChoice === compChoice){
       console.log('tie')
 
