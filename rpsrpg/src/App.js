@@ -13,14 +13,12 @@ export default class App extends Component {
       name:'',
       health:100,
       defense:5,
-      attack:15
-    },
+      attack:15},
     enemy: {
       name:'Evil',
       health:100,
       defense:15,
-      attack:5
-    },
+      attack:5},
     playerChoice:'',
     compChoice:'',
     board:{
@@ -28,12 +26,14 @@ export default class App extends Component {
       won:0,
       lost:0
     },
-    person:null
+    characters:[]
   }
 componentDidMount(){
-  this.setState({
-    person: new Person('Jon')
-  })
+    this.createCharacter('ilana','thickest of them all')
+  // this.setState({
+  //   person: new Person('Jon','Destoyer of all'),
+  //   person1: new Person('Ilana','Thickest of em all')
+  // })
   // console.log(this.state)
 }
   handleChange = e => {
@@ -51,6 +51,15 @@ componentDidMount(){
   });
 
   }
+  createCharacter =async (name,title) => {
+    let character = await new Person(name,title)
+    // console.log(character)
+    // await this.setState({
+    //   characters:this.state.characters.push(character)
+    // })
+    // debugger;
+  }
+
 
   //rock=0, paper=1, scissors=2
   submitBattle = async e => {
@@ -63,35 +72,34 @@ componentDidMount(){
 
     if (playerChoice === compChoice){
       console.log('tie')
-        debugger
+
       this.setState({
-        board: Object.assign({},
+        board: Object.assign(
           this.state.board,
         {tie: this.state.board.tie + 1}
       )
     });
 
-    }
-    else if ((playerChoice - compChoice + 3) % 3 === 1){
-      debugger
+    }else if ((playerChoice - compChoice + 3) % 3 === 1){
       console.log('won')
       this.setState({
-        board: Object.assign({},
+        board: Object.assign(
           this.state.board,
-        {won: this.state.board.won + 1}
-      )
-    });
-
+        {won: this.state.board.won + 1})
+    })
+    this.setState({
+      enemy:Object.assign(this.state.enemy,{health:this.state.enemy.health - this.state.hero.attack})
+    })
     }else{
-        debugger
+
       console.log('lost')
       this.setState({
-        board: Object.assign({},
-          this.state.board,
-        {lost: this.state.board.lost + 1}
-      )
+        board: Object.assign(this.state.board,{lost: this.state.board.lost + 1})
       });
     }
+    this.setState({
+      hero:Object.assign(this.state.hero,{health:this.state.hero.health - this.state.enemy.attack})
+    })
 
 
 
@@ -152,3 +160,6 @@ componentDidMount(){
   }
 
 }
+
+//0-300
+//0 1 2

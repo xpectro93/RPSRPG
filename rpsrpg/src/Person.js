@@ -1,11 +1,15 @@
 import React ,  { Component } from 'react'
 
 export default class Person extends Component {
-  constructor(name){
+  constructor(name,title){
     super()
     this.state = {
-      name:name
+      name:name,
+      attack:15,
+      defense:5,
+      title:title
     }
+
   }
   render(){
     return(
