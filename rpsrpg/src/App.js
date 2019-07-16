@@ -27,7 +27,6 @@ export default class App extends Component {
     characters:[]
   }
 componentDidMount(){
-    this.createCharacter('ilana','thickest of them all')
   // this.setState({
   //   person: new Person('Jon','Destoyer of all'),
   //   person1: new Person('Ilana','Thickest of em all')
