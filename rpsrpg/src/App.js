@@ -1,12 +1,10 @@
 import React, {Component } from 'react';
 import './App.css';
-import Person from './Person'
 let heroImg = 'https://www.stickpng.com/assets/thumbs/5a0587ef9cf05203c4b603d1.png'
 let enemyImg = 'https://progameguides.com/wp-content/uploads/2019/04/fortnite-spider-knight-featured-png.png'
 export default class App extends Component {
-  constructor(props){
-    super(props)
-  }
+
+
   state = {
     input:'',
     hero:{
@@ -51,15 +49,6 @@ componentDidMount(){
   });
 
   }
-  createCharacter =async (name,title) => {
-    let character = await new Person(name,title)
-    // console.log(character)
-    // await this.setState({
-    //   characters:this.state.characters.push(character)
-    // })
-    // debugger;
-  }
-
 
   //rock=0, paper=1, scissors=2
   submitBattle = async e => {
@@ -109,9 +98,20 @@ componentDidMount(){
       [e.target.name]:+e.target.id
     })
   }
+  actionDisplay = (choice) => {
+    if(choice  === 0){
+      return <h3>Rock</h3>
+    }else if(choice  === 1){
+      return <h3>Paper</h3>
+    }else if(choice  === 2){
+      return <h3>Scissors</h3>
+    }else {
+      return <h3>Waiting for move...</h3>
+    }
+  }
   //rock=0, paper=1, scissors=2
   render(){
-    let { input,hero,enemy,board } = this.state;
+    let { input,hero,enemy,board, playerChoice, compChoice } = this.state;
     console.log(this.state)
     return (
       <>
@@ -128,6 +128,7 @@ componentDidMount(){
 
         <div id='Hero'>
           <h3>{hero.health}</h3>
+          {this.actionDisplay(playerChoice)}
           <h1>{hero.name? hero.name:'Type your Name'}</h1>
           <img src={heroImg} alt='hero'></img>
           <div>
@@ -145,6 +146,7 @@ componentDidMount(){
 
         <div id ='enemy'>
         <h3>{enemy.health}</h3>
+        {this.actionDisplay(compChoice)}
         <h1>{enemy.name}</h1>
         <img src={enemyImg} alt='enemy'></img>
         <div>
@@ -156,7 +158,7 @@ componentDidMount(){
 
       </div>
       </>
-    );
+    )
   }
 
 }
